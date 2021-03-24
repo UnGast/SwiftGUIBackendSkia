@@ -17,10 +17,16 @@ let package = Package(
     targets: [
         .target(
             name: "SwiftGUIBackendSDL2Skia",
-            dependencies: ["CSDL2", "SwiftGUI"]),
+            dependencies: ["CSDL2", "SwiftGUI", "CSkia"]),
         .target(
             name: "Demo",
-            dependencies: ["SwiftGUIBackendSDL2Skia", "SwiftGUI"]
-        )
+            dependencies: ["SwiftGUIBackendSDL2Skia", "SwiftGUI"]),
+        .target(name: "CSkia", cxxSettings: [
+            .headerSearchPath("../../skia/"),
+            .headerSearchPath("../../skia/include/core")
+        ], linkerSettings: [
+            .linkedLibrary("skia"),
+            .linkedLibrary("fontconfig")
+        ])
    ]
 )
