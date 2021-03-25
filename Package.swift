@@ -6,21 +6,21 @@ let package = Package(
     name: "SwiftGUIBackendSDL2Skia",
     products: [
         .library(
-            name: "SwiftGUIBackendSDL2Skia",
-            targets: ["SwiftGUIBackendSDL2Skia"]),
+            name: "SwiftGUIBackendSkia",
+            targets: ["SwiftGUIBackendSkia"]),
         .executable(name: "Demo", targets: ["Demo"])
     ],
     dependencies: [
         .package(url: "https://github.com/UnGast/CSDL2.git", .branch("master")),
-        .package(name: "SwiftGUI", url: "https://github.com/UnGast/swift-gui.git", .branch("master"))
+        .package(name: "SwiftGUI", path: "../swift-gui")
     ],
     targets: [
         .target(
-            name: "SwiftGUIBackendSDL2Skia",
+            name: "SwiftGUIBackendSkia",
             dependencies: ["CSDL2", "SwiftGUI", "CSkia"]),
         .target(
             name: "Demo",
-            dependencies: ["SwiftGUIBackendSDL2Skia", "SwiftGUI"]),
+            dependencies: ["SwiftGUIBackendSkia", "SwiftGUI"]),
         .target(name: "CSkia", cSettings: [
             .headerSearchPath("../../skia/"),
             .headerSearchPath("../../skia/include/core")

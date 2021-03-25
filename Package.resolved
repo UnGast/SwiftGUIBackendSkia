@@ -24,7 +24,7 @@
         "repositoryURL": "https://github.com/cx-org/CombineX.git",
         "state": {
           "branch": "master",
-          "revision": "2b9aada735f4ed1c04195c425ba7155b696ecb99",
+          "revision": "b9afefe14653f02a80a9f5aa546859e99073d0c8",
           "version": null
         }
       },
@@ -61,15 +61,6 @@
         "state": {
           "branch": "master",
           "revision": "b04851b2c252c72c5bf50a69dde5514c9f386897",
-          "version": null
-        }
-      },
-      {
-        "package": "SwiftGUI",
-        "repositoryURL": "https://github.com/UnGast/swift-gui.git",
-        "state": {
-          "branch": "master",
-          "revision": "8ae2fdaaa43130de10bb18e964739dc096656b96",
           "version": null
         }
       },

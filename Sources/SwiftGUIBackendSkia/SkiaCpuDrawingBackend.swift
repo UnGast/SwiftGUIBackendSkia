@@ -1,6 +1,7 @@
 import VisualAppBase
 import CSkia
 import GfxMath
+import SwiftGUI
 
 open class SkiaCpuDrawingBackend: DrawingBackend {
   private let surface: CpuBufferDrawingSurface
@@ -72,5 +73,13 @@ open class SkiaCpuDrawingBackend: DrawingBackend {
     if let fillPaint = fillPaint {
       sk_canvas_draw_circle(skiaCanvas, Float(center.x), Float(center.y), Float(radius), fillPaint)
     }
+  }
+
+  override open func drawText(text: String, position: DVec2, paint: TextPaint) {
+
+  }
+
+  override open func measureText(text: String, paint: TextPaint) -> DSize2 {
+    .zero
   }
 }
