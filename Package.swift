@@ -21,7 +21,10 @@ let package = Package(
         .target(
             name: "Demo",
             dependencies: ["SwiftGUIBackendSDL2Skia", "SwiftGUI"]),
-        .target(name: "CSkia", cxxSettings: [
+        .target(name: "CSkia", cSettings: [
+            .headerSearchPath("../../skia/"),
+            .headerSearchPath("../../skia/include/core")
+        ], cxxSettings: [
             .headerSearchPath("../../skia/"),
             .headerSearchPath("../../skia/include/core")
         ], linkerSettings: [

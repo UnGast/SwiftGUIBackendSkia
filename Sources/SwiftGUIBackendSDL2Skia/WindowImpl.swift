@@ -3,6 +3,7 @@ import SwiftGUI
 
 open class SDL2SkiaWindow: Window {
   public var sdlWindow: OpaquePointer
+  public var surface: CpuBufferDrawingSurface
 
   public required init(options: Options) throws {
     SDL_Init(SDL_INIT_VIDEO)
@@ -30,9 +31,10 @@ open class SDL2SkiaWindow: Window {
 
     SDL_LockTexture(texture, nil, &pixels, &rowLength)
 
-    var surface = CpuBufferDrawingSurface(size: size)
+    surface = CpuBufferDrawingSurface(size: size)
     surface.buffer = pixels!.bindMemory(to: Int8.self, capacity: size.width * size.height * 4)
     let drawingBackend = SkiaCpuDrawingBackend(surface: surface)
+    drawingBackend.drawLine(from: .zero, to: DVec2(options.initialSize), paint: Paint(color: nil, strokeWidth: 1, strokeColor: .blue))
 
     SDL_UnlockTexture(texture)
 
