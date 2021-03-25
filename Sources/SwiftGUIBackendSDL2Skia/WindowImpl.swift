@@ -35,6 +35,7 @@ open class SDL2SkiaWindow: Window {
     surface.buffer = pixels!.bindMemory(to: Int8.self, capacity: size.width * size.height * 4)
     let drawingBackend = SkiaCpuDrawingBackend(surface: surface)
     drawingBackend.drawLine(from: .zero, to: DVec2(options.initialSize), paint: Paint(color: nil, strokeWidth: 1, strokeColor: .blue))
+    drawingBackend.drawRect(rect: DRect(min: DVec2(200, 200), max: DVec2(400, 400)), paint: Paint(color: .yellow))
 
     SDL_UnlockTexture(texture)
 
