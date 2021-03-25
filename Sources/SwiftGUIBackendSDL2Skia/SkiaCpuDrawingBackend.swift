@@ -34,15 +34,16 @@ open class SkiaCpuDrawingBackend: DrawingBackend {
   }
 
   override open func drawLine(from start: DVec2, to end: DVec2, paint: Paint) {
-    let pathBuilder = sk_pathbuilder_new()
-    sk_pathbuilder_move_to(pathBuilder, Float(start.x), Float(start.y))
-    sk_pathbuilder_line_to(pathBuilder, Float(end.x), Float(end.y))
-    let path = sk_pathbuilder_detach_path(pathBuilder);
-    let paint = sk_paint_new();
-    sk_paint_set_stroke(paint, true)
-    sk_paint_set_stroke_width(paint, 1)
-    sk_paint_set_color(paint, sgui_sk_color_argb(255, 100, 50, 100))
-    sk_canvas_draw_path(skiaCanvas, path, paint)
+    let (strokePaint, _) = paintToSkia(paint)
+    
+    if let strokePaint = strokePaint {
+      let pathBuilder = sk_pathbuilder_new()
+      sk_pathbuilder_move_to(pathBuilder, Float(start.x), Float(start.y))
+      sk_pathbuilder_line_to(pathBuilder, Float(end.x), Float(end.y))
+      let path = sk_pathbuilder_detach_path(pathBuilder);
+      sk_paint_set_color(strokePaint, sgui_sk_color_argb(255, 100, 50, 100))
+      sk_canvas_draw_path(skiaCanvas, path, strokePaint)
+    }
   }
 
   override open func drawRect(rect: DRect, paint: Paint) {
@@ -60,6 +61,16 @@ open class SkiaCpuDrawingBackend: DrawingBackend {
 
     if let fillPaint = fillPaint {
       sk_canvas_draw_rect(skiaCanvas, &skiaRect, fillPaint)
+    }
+  }
+
+  override open func drawCircle(center: DVec2, radius: Double, paint: Paint) {
+    let (strokePaint, fillPaint) = paintToSkia(paint)
+    if let strokePaint = strokePaint {
+      sk_canvas_draw_circle(skiaCanvas, Float(center.x), Float(center.y), Float(radius), strokePaint)
+    }
+    if let fillPaint = fillPaint {
+      sk_canvas_draw_circle(skiaCanvas, Float(center.x), Float(center.y), Float(radius), fillPaint)
     }
   }
 }
