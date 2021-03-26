@@ -34,6 +34,16 @@ open class SkiaCpuDrawingBackend: DrawingBackend {
     return (strokePaint: skiaStrokePaint, fillPaint: skiaFillPaint)
   }
 
+  func paintToSkia(_ paint: TextPaint) -> (strokePaint: OpaquePointer?, fillPaint: OpaquePointer?) {
+    var skiaFillPaint: OpaquePointer?
+    if let color = paint.color {
+      skiaFillPaint = sk_paint_new()
+      sk_paint_set_color(skiaFillPaint, sgui_sk_color_argb(color.a, color.r, color.g, color.b))
+    }
+
+    return (strokePaint: nil, fillPaint: skiaFillPaint)
+  }
+
   override open func drawLine(from start: DVec2, to end: DVec2, paint: Paint) {
     let (strokePaint, _) = paintToSkia(paint)
     
@@ -76,7 +86,18 @@ open class SkiaCpuDrawingBackend: DrawingBackend {
   }
 
   override open func drawText(text: String, position: DVec2, paint: TextPaint) {
+    var skiaPoint = sk_point_t()
+    skiaPoint.x = Float(position.x)
+    skiaPoint.y = Float(position.y)
+    let (skiaStrokePaint, skiaFillPaint) = paintToSkia(paint)
 
+    if let skiaStrokePaint = skiaStrokePaint {
+      sgui_sk_canvas_draw_text(skiaCanvas, text, skiaPoint, skiaStrokePaint, Float(paint.fontConfig.size))
+    }
+
+    if let skiaFillPaint = skiaFillPaint {
+      sgui_sk_canvas_draw_text(skiaCanvas, text, skiaPoint, skiaFillPaint, Float(paint.fontConfig.size))
+    }
   }
 
   override open func measureText(text: String, paint: TextPaint) -> DSize2 {

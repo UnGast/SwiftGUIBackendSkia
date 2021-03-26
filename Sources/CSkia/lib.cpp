@@ -9,6 +9,8 @@
 #include "SkPaint.h"
 #include "include/core/SkSurface.h"
 #include "SkSurface.h"
+#include "SkTextBlob.h"
+#include "SkFont.h"
 #include "include/c/sk_canvas.h"
 #include "include/c/sk_surface.h"
 
@@ -51,6 +53,15 @@ extern "C" {
     SkCanvas* canvas = surface->getCanvas();
     theSurface = surface;
     return reinterpret_cast<sk_canvas_t*>(canvas);
+  }
+
+  void sgui_sk_canvas_draw_text(sk_canvas_t* _canvas, const char* _text, sk_point_t point, sk_paint_t* _paint, float fontSize) {
+    auto canvas = reinterpret_cast<SkCanvas*>(_canvas);
+
+    auto paint = reinterpret_cast<SkPaint*>(_paint);
+
+    auto text = SkTextBlob::MakeFromString(_text, SkFont(nullptr, fontSize));
+    canvas->drawTextBlob(text.get(), point.x, point.y, *paint); 
   }
 
   uint32_t sgui_sk_color_argb(uint8_t a, uint8_t r, uint8_t g, uint8_t b) {
