@@ -82,4 +82,10 @@ open class SkiaCpuDrawingBackend: DrawingBackend {
   override open func measureText(text: String, paint: TextPaint) -> DSize2 {
     .zero
   }
+
+  override open func clip(rect: DRect) {
+  }
+
+  override open func resetClip() {
+  }
 }
