@@ -52,7 +52,7 @@ extern "C" {
     return reinterpret_cast<sk_canvas_t*>(canvas);
   }
 
-  void sgui_sk_canvas_draw_text(sk_canvas_t* _canvas, const char* _text, sk_point_t point, sgui_sk_font_t* _font, sk_paint_t* _paint) {
+  void sgui_sk_canvas_draw_text(sk_canvas_t* _canvas, const char* _text, sk_point_t bottom_left, sgui_sk_font_t* _font, sk_paint_t* _paint) {
     auto canvas = reinterpret_cast<SkCanvas*>(_canvas);
 
     auto paint = reinterpret_cast<SkPaint*>(_paint);
@@ -60,7 +60,7 @@ extern "C" {
     auto font = reinterpret_cast<SkFont*>(_font);
 
     auto text = SkTextBlob::MakeFromString(_text, *font);
-    canvas->drawTextBlob(text.get(), point.x, point.y, *paint); 
+    canvas->drawTextBlob(text.get(), bottom_left.x, bottom_left.y, *paint); 
   }
 
   sgui_sk_font_t* sgui_sk_font_new() {

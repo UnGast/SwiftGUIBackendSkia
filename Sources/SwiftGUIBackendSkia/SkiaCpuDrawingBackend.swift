@@ -88,7 +88,7 @@ open class SkiaCpuDrawingBackend: DrawingBackend {
   override open func drawText(text: String, position: DVec2, paint: TextPaint) {
     var skiaPoint = sk_point_t()
     skiaPoint.x = Float(position.x)
-    skiaPoint.y = Float(position.y)
+    skiaPoint.y = Float(position.y) + Float(paint.fontConfig.size)
     let (skiaStrokePaint, skiaFillPaint) = paintToSkia(paint)
 
     let skiaFont = sgui_sk_font_new()

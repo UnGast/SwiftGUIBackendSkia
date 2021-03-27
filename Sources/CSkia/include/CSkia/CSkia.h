@@ -16,7 +16,7 @@ sgui_sk_font_t* sgui_sk_font_new();
 
 void sgui_sk_font_set_size(sgui_sk_font_t* _font, float size);
 
-void sgui_sk_canvas_draw_text(sk_canvas_t* canvas, const char* text, sk_point_t point, sgui_sk_font_t* font, const sk_paint_t* paint);
+void sgui_sk_canvas_draw_text(sk_canvas_t* canvas, const char* text, sk_point_t bottom_left, sgui_sk_font_t* font, const sk_paint_t* paint);
 
 //  void sgui_sk_paint
 

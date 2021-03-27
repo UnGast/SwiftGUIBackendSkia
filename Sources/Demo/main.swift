@@ -31,6 +31,11 @@ let guiRoot = Root(rootWidget: Container().with(styleProperties: {
     (\.$height, 200)
     (\.$background, .white)
   })
+
+  Text("Wow Fantastic Baby").with(styleProperties: {
+    (\.$foreground, .black)
+    (\.$fontSize, 40)
+  })
 })
 
 guiRoot.setup(
@@ -44,12 +49,12 @@ guiRoot.bounds.size = DSize2(window.size)
 guiRoot.tick(Tick(deltaTime: 0, totalTime: 0))
 guiRoot.draw(drawingContext)
 
-drawingBackend.drawLine(from: .zero, to: DVec2(200, Double(window.surface.size.height)), paint: Paint(color: nil, strokeWidth: 1, strokeColor: .blue))
+/*drawingBackend.drawLine(from: .zero, to: DVec2(200, Double(window.surface.size.height)), paint: Paint(color: nil, strokeWidth: 1, strokeColor: .blue))
 drawingBackend.drawRect(rect: DRect(min: DVec2(200, 200), max: DVec2(400, 400)), paint: Paint(color: .yellow))
 drawingBackend.drawCircle(center: DVec2(150, 150), radius: 100, paint: Paint(color: .green, strokeWidth: 1.0, strokeColor: .red))
 drawingBackend.drawText(text: "Hello World", position: DVec2(200, 200), paint: TextPaint(fontConfig: FontConfig(
   family: defaultFontFamily, size: 48, weight: .regular, style: .normal 
-), color: .orange, breakWidth: nil))
+), color: .orange, breakWidth: nil))*/
 
 window.swap()
 
