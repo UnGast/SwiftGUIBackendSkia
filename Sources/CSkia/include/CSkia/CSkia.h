@@ -2,8 +2,7 @@
 #include "c/sk_path.h"
 #include "c/sk_paint.h"
 #include "c/sk_types.h"
-
-void testFunc();
+#include "types.h"
 
 char* testDraw(int width, int height, char *buffer);
 
@@ -13,7 +12,11 @@ sk_canvas_t* setupCanvas(int width, int height, char *buffer);
 
 uint32_t sgui_sk_color_argb(uint8_t a, uint8_t r, uint8_t g, uint8_t b);
 
-void sgui_sk_canvas_draw_text(sk_canvas_t* canvas, const char* text, sk_point_t point, const sk_paint_t* paint, float fontSize);
+sgui_sk_font_t* sgui_sk_font_new();
+
+void sgui_sk_font_set_size(sgui_sk_font_t* _font, float size);
+
+void sgui_sk_canvas_draw_text(sk_canvas_t* canvas, const char* text, sk_point_t point, sgui_sk_font_t* font, const sk_paint_t* paint);
 
 //  void sgui_sk_paint
 

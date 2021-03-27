@@ -1,0 +1,1 @@
+typedef struct sgui_sk_font_t sgui_sk_font_t;

@@ -91,12 +91,15 @@ open class SkiaCpuDrawingBackend: DrawingBackend {
     skiaPoint.y = Float(position.y)
     let (skiaStrokePaint, skiaFillPaint) = paintToSkia(paint)
 
+    let skiaFont = sgui_sk_font_new()
+    sgui_sk_font_set_size(skiaFont, Float(paint.fontConfig.size));
+
     if let skiaStrokePaint = skiaStrokePaint {
-      sgui_sk_canvas_draw_text(skiaCanvas, text, skiaPoint, skiaStrokePaint, Float(paint.fontConfig.size))
+      sgui_sk_canvas_draw_text(skiaCanvas, text, skiaPoint, skiaFont, skiaStrokePaint)
     }
 
     if let skiaFillPaint = skiaFillPaint {
-      sgui_sk_canvas_draw_text(skiaCanvas, text, skiaPoint, skiaFillPaint, Float(paint.fontConfig.size))
+      sgui_sk_canvas_draw_text(skiaCanvas, text, skiaPoint, skiaFont, skiaFillPaint)
     }
   }
 
