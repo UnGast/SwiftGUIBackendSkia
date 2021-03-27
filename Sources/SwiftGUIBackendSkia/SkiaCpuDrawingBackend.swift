@@ -104,7 +104,11 @@ open class SkiaCpuDrawingBackend: DrawingBackend {
   }
 
   override open func measureText(text: String, paint: TextPaint) -> DSize2 {
-    .zero
+    let skiaFont = sgui_sk_font_new()
+    sgui_sk_font_set_size(skiaFont, Float(paint.fontConfig.size));
+    let width = sgui_sk_font_measure_text(skiaFont, text)
+    print("MEASURE TEXT", width)
+    return DSize2(Double(width), paint.fontConfig.size)
   }
 
   override open func clip(rect: DRect) {

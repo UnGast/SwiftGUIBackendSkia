@@ -3,7 +3,7 @@
 import PackageDescription
 
 let package = Package(
-    name: "SwiftGUIBackendSDL2Skia",
+    name: "SwiftGUIBackendSkia",
     products: [
         .library(
             name: "SwiftGUIBackendSkia",

@@ -73,6 +73,13 @@ extern "C" {
     font->setSize(size);
   }
 
+  float sgui_sk_font_measure_text(sgui_sk_font_t* _font, const char* _text) {
+    auto font = reinterpret_cast<SkFont*>(_font);
+    auto text = std::string(_text);
+    auto width = font->measureText(text.data(), text.size(), SkTextEncoding::kUTF8);
+    return width;
+  }
+
   uint32_t sgui_sk_color_argb(uint8_t a, uint8_t r, uint8_t g, uint8_t b) {
     return sk_color_set_argb(a, r, g, b);
   }
